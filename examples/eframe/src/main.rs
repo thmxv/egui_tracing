@@ -1,10 +1,7 @@
 use egui_tracing::tracing::collector::EventCollector;
 use egui_tracing::tracing_subscriber::layer::SubscriberExt;
 use egui_tracing::tracing_subscriber::util::SubscriberInitExt;
-use egui_tracing::{
-    egui::{self, Widget as _},
-    tracing_subscriber,
-};
+use egui_tracing::{egui, tracing_subscriber};
 
 fn main() {
     let collector = egui_tracing::EventCollector::default();
@@ -42,6 +39,6 @@ impl MyApp {
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| self.logs.ui(ui));
+        egui::CentralPanel::default().show(ctx, |ui| ui.add(&mut self.logs));
     }
 }

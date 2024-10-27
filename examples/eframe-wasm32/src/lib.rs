@@ -1,4 +1,4 @@
-use egui_tracing::egui::{self, Widget as _};
+use egui_tracing::egui;
 #[cfg(target_arch = "wasm32")]
 use egui_tracing::tracing::collector::EventCollector;
 #[cfg(target_arch = "wasm32")]
@@ -53,8 +53,6 @@ impl MyApp {
 
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
-            self.logs.ui(ui)
-        });
+        egui::CentralPanel::default().show(ctx, |ui| ui.add(&mut self.logs));
     }
 }

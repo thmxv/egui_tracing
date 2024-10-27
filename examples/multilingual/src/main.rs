@@ -2,10 +2,7 @@ use egui_tracing::tracing::collector::EventCollector;
 use egui_tracing::tracing_subscriber::layer::SubscriberExt;
 use egui_tracing::tracing_subscriber::util::SubscriberInitExt;
 use egui_tracing::ui::labels::TracingLabels;
-use egui_tracing::{
-    egui::{self, Widget as _},
-    tracing_subscriber,
-};
+use egui_tracing::{egui, tracing_subscriber};
 
 #[derive(Debug, Clone, PartialEq)]
 enum Language {
@@ -91,7 +88,7 @@ impl eframe::App for MyApp {
             if language_before != self.language {
                 self.update_labels();
             }
-            self.logs.ui(ui);
+            ui.add(&mut self.logs)
         });
     }
 }
